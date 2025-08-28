@@ -4,77 +4,147 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Drinks & Dragons — Play. Sip. Roll.</title>
+  <meta name="description" content="A cozy hub for tabletop one-shots, campaigns, and community nights. Reserve tables, check events, and join the community." />
   <style>
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.5; color:#111; }
+    :root { --bg:#ffffff; --ink:#111; --muted:#666; --card:#f6f6f6; --line:#e9e9e9; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; color:var(--ink); background:var(--bg); }
+    a { color: inherit; }
     .wrap { max-width: 1000px; margin: 0 auto; padding: 24px; }
-    header { padding: 48px 24px; text-align: center; }
-    .hero { background: #f6f6f6; border-radius: 16px; padding: 40px 24px; }
-    h1 { margin: 0 0 12px; font-size: clamp(28px, 4vw, 44px); }
-    p.lead { margin: 0 auto 20px; max-width: 720px; font-size: 1.1rem; }
-    .cta { display:inline-block; padding: 12px 18px; border-radius: 10px; background:#111; color:#fff; text-decoration:none; }
-    .grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top:24px; }
-    .card { border:1px solid #e5e5e5; border-radius:12px; padding:16px; background:#fff; }
-    footer { margin: 40px 0 24px; font-size: 0.95rem; color:#555; text-align:center; }
-    nav a { margin: 0 10px; color:#111; text-decoration:none; }
+    header { position: sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line); z-index:10; }
+    nav { display:flex; gap:16px; align-items:center; justify-content:center; padding:12px 0; flex-wrap:wrap; }
+    nav a { text-decoration:none; padding:6px 10px; border-radius:8px; }
+    nav a:hover { background:var(--card); }
+    .hero { margin-top: 18px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:40px 24px; text-align:center; }
+    h1 { margin:0 0 8px; font-size:clamp(28px, 4vw, 44px); line-height:1.2; }
+    p.lead { margin:0 auto 18px; max-width:720px; font-size:1.1rem; color:var(--muted); }
+    .cta { display:inline-block; padding:12px 18px; border-radius:10px; background:var(--ink); color:#fff; text-decoration:none; }
+    .grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top:24px; }
+    .card { border:1px solid var(--line); border-radius:14px; padding:18px; background:#fff; }
+    .card h3 { margin:6px 0 8px; }
+    label { display:block; font-weight:600; margin:10px 0 6px; }
+    input, textarea, select, button { width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; font:inherit; }
+    button { cursor:pointer; background:var(--ink); color:#fff; }
+    button:hover { opacity:.9; }
+    small, .muted { color:var(--muted); }
+    footer { text-align:center; color:var(--muted); padding:36px 0 28px; }
+    .ok { background:#ecfdf5; border:1px solid #d1fae5; color:#065f46; padding:10px 12px; border-radius:10px; }
+    .err { background:#fef2f2; border:1px solid #fee2e2; color:#991b1b; padding:10px 12px; border-radius:10px; }
   </style>
 </head>
 <body>
-  <header class="wrap">
-    <nav>
-      <a href="#events">Events</a>
-      <a href="#reserve">Reserve</a>
-      <a href="#join">Join</a>
-      <a href="#find-us">Find Us</a>
-    </nav>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Main">
+        <a href="#events">Events</a>
+        <a href="#reserve">Reserve</a>
+        <a href="#join">Join</a>
+        <a href="#find-us">Find Us</a>
+      </nav>
+    </div>
   </header>
 
   <main class="wrap">
-    <section class="hero">
+    <section class="hero" id="top">
       <h1>Drinks & Dragons</h1>
-      <p class="lead">A cozy hub for tabletop one-shots, campaigns, and community nights. Grab a table, roll some dice, and enjoy themed drinks & bites.</p>
+      <p class="lead">Tabletop one-shots, campaigns, and community nights. Grab a table, roll some dice, and enjoy themed drinks & bites.</p>
       <a class="cta" href="#reserve">Reserve a Table</a>
     </section>
+
+    <section id="flash" style="margin-top:18px;"></section>
 
     <section id="events" class="grid">
       <div class="card">
         <h3>Upcoming Events</h3>
         <ul>
-          <li>Wed — Beginner One-Shot (Lvl 3)</li>
-          <li>Fri — Open Table Night</li>
-          <li>Sat — Miniatures Demo</li>
+          <li><strong>Wed</strong> — Beginner One-Shot (Lvl 3)</li>
+          <li><strong>Fri</strong> — Open Table Night</li>
+          <li><strong>Sat</strong> — Miniatures Demo</li>
         </ul>
-        <p><em>Tickets coming soon.</em></p>
+        <p class="muted"><em>Ticketed nights coming soon.</em></p>
       </div>
+
       <div class="card" id="reserve">
         <h3>Reserve a Table</h3>
-        <p>Tell us your party size and time—confirmation by email.</p>
+        <p class="muted">Send a request—confirmation arrives by email.</p>
+        <!-- FormSubmit sends to your email -->
         <form action="https://formsubmit.co/bmontgomery55@ivytech.edu" method="POST">
-          <input type="hidden" name="_subject" value="New Table Reservation" />
-          <label>Party Size <br><input name="party_size" required /></label><br><br>
-          <label>Date & Time <br><input name="datetime" required /></label><br><br>
-          <label>Your Email <br><input type="email" name="email" required /></label><br><br>
-          <button type="submit">Send Request</button>
+          <!-- FormSubmit options -->
+          <input type="hidden" name="_subject" value="New Table Reservation — Drinks & Dragons">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://USERNAME.github.io/#thanks"> <!-- replace USERNAME if using user site; or add your full Pages URL -->
+
+          <label for="party">Party Size</label>
+          <input id="party" name="Party Size" type="number" min="1" required>
+
+          <label for="datetime">Date & Time</label>
+          <input id="datetime" name="Date & Time" type="text" placeholder="Fri 7pm" required>
+
+          <label for="email">Your Email</label>
+          <input id="email" name="Reply-To" type="email" required>
+
+          <label for="notes">Notes (optional)</label>
+          <textarea id="notes" name="Notes" rows="3" placeholder="System preference, accessibility needs, celebration, etc."></textarea>
+
+          <!-- Honeypot (spam trap) -->
+          <input type="text" name="_honey" style="display:none">
+          <br>
+          <button type="submit">Send Reservation Request</button>
         </form>
-        <small>You can swap this for a real booking widget later.</small>
+        <small class="muted">You can swap this for a real booking widget later.</small>
       </div>
+
       <div class="card" id="join">
         <h3>Join the Community</h3>
-        <p><a href="#" aria-disabled="true">Discord (coming soon)</a></p>
+        <p class="muted">Discord link coming soon. Join the list for event drops & one-shots.</p>
         <form action="https://formsubmit.co/bmontgomery55@ivytech.edu" method="POST">
-          <input type="hidden" name="_subject" value="Newsletter Signup" />
-          <label>Email <br><input type="email" name="email" required /></label><br><br>
+          <input type="hidden" name="_subject" value="Newsletter Signup — Drinks & Dragons">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://USERNAME.github.io/#thanks">
+
+          <label for="listemail">Email</label>
+          <input id="listemail" name="Email" type="email" required>
+
+          <label for="name">Name (optional)</label>
+          <input id="name" name="Name" type="text" placeholder="Adventurer name works too ✨">
+          <br>
           <button type="submit">Join Mailing List</button>
         </form>
       </div>
+
       <div class="card" id="find-us">
         <h3>Find Us</h3>
         <p>Bloomington, IN • Open late on event nights.</p>
-        <p><a href="https://maps.google.com" target="_blank" rel="noreferrer">Open in Maps</a></p>
+        <p><a href="https://maps.google.com/?q=Bloomington%2C+IN" target="_blank" rel="noreferrer">Open in Maps</a></p>
+      </div>
+    </section>
+
+    <section id="thanks" style="margin-top:24px;">
+      <div class="ok" role="status" aria-live="polite" hidden>
+        Thanks! Your message was sent. We’ll reply soon.
       </div>
     </section>
   </main>
 
   <footer>© <span id="y"></span> Drinks & Dragons</footer>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+
+  <script>
+    // Year in footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Show a friendly "sent" message if redirected back with #thanks or ?sent
+    const flash = document.querySelector('#thanks .ok');
+    const triggered = location.hash === '#thanks' || location.search.includes('success');
+    if (flash && triggered) flash.hidden = false;
+
+    // If this is a project site (username.github.io/repo/), you can set the _next fields at runtime:
+    const isProjectSite = location.pathname.split('/').filter(Boolean).length >= 1;
+    if (isProjectSite) {
+      const base = location.origin + location.pathname.replace(/index\.html?$/,'');
+      document.querySelectorAll('form input[name="_next"]').forEach(i => i.value = base + '#thanks');
+    }
+  </script>
 </body>
 </html>
