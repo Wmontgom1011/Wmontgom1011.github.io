@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Drinks & Dragons — Play. Sip. Roll.</title>
+  <style>
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.5; color:#111; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 24px; }
+    header { padding: 48px 24px; text-align: center; }
+    .hero { background: #f6f6f6; border-radius: 16px; padding: 40px 24px; }
+    h1 { margin: 0 0 12px; font-size: clamp(28px, 4vw, 44px); }
+    p.lead { margin: 0 auto 20px; max-width: 720px; font-size: 1.1rem; }
+    .cta { display:inline-block; padding: 12px 18px; border-radius: 10px; background:#111; color:#fff; text-decoration:none; }
+    .grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top:24px; }
+    .card { border:1px solid #e5e5e5; border-radius:12px; padding:16px; background:#fff; }
+    footer { margin: 40px 0 24px; font-size: 0.95rem; color:#555; text-align:center; }
+    nav a { margin: 0 10px; color:#111; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav>
+      <a href="#events">Events</a>
+      <a href="#reserve">Reserve</a>
+      <a href="#join">Join</a>
+      <a href="#find-us">Find Us</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Drinks & Dragons</h1>
+      <p class="lead">A cozy hub for tabletop one-shots, campaigns, and community nights. Grab a table, roll some dice, and enjoy themed drinks & bites.</p>
+      <a class="cta" href="#reserve">Reserve a Table</a>
+    </section>
+
+    <section id="events" class="grid">
+      <div class="card">
+        <h3>Upcoming Events</h3>
+        <ul>
+          <li>Wed — Beginner One-Shot (Lvl 3)</li>
+          <li>Fri — Open Table Night</li>
+          <li>Sat — Miniatures Demo</li>
+        </ul>
+        <p><em>Tickets coming soon.</em></p>
+      </div>
+      <div class="card" id="reserve">
+        <h3>Reserve a Table</h3>
+        <p>Tell us your party size and time—confirmation by email.</p>
+        <form action="https://formsubmit.co/bmontgomery55@ivytech.edu" method="POST">
+          <input type="hidden" name="_subject" value="New Table Reservation" />
+          <label>Party Size <br><input name="party_size" required /></label><br><br>
+          <label>Date & Time <br><input name="datetime" required /></label><br><br>
+          <label>Your Email <br><input type="email" name="email" required /></label><br><br>
+          <button type="submit">Send Request</button>
+        </form>
+        <small>You can swap this for a real booking widget later.</small>
+      </div>
+      <div class="card" id="join">
+        <h3>Join the Community</h3>
+        <p><a href="#" aria-disabled="true">Discord (coming soon)</a></p>
+        <form action="https://formsubmit.co/bmontgomery55@ivytech.edu" method="POST">
+          <input type="hidden" name="_subject" value="Newsletter Signup" />
+          <label>Email <br><input type="email" name="email" required /></label><br><br>
+          <button type="submit">Join Mailing List</button>
+        </form>
+      </div>
+      <div class="card" id="find-us">
+        <h3>Find Us</h3>
+        <p>Bloomington, IN • Open late on event nights.</p>
+        <p><a href="https://maps.google.com" target="_blank" rel="noreferrer">Open in Maps</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="y"></span> Drinks & Dragons</footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
